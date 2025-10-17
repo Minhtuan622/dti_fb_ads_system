@@ -12,10 +12,10 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Trang chủ') }}</flux:navlist.item>
-                    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Page') }}</flux:navlist.item>
-                    <flux:navlist.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dự án') }}</flux:navlist.item>
+                <flux:navlist.group :heading="__('Tổng quan')" class="grid">
+                    <flux:navlist.item icon="home" class="mb-2" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Trang chủ') }}</flux:navlist.item>
+                    <flux:navlist.item icon="folder-open" class="mb-2" :href="route('page')" :current="request()->routeIs('page')" wire:navigate>{{ __('Trang') }}</flux:navlist.item>
+                    <flux:navlist.item icon:trailing="cog" class="mb-2" :href="route('project')" :current="request()->routeIs('project')" wire:navigate>{{ __('Dự án') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

@@ -12,6 +12,14 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+Route::view('page', 'page')
+    ->middleware(['auth', 'verified'])
+    ->name('page');
+
+Route::view('project', 'project')
+    ->middleware(['auth', 'verified'])
+    ->name('project');
+
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
 
