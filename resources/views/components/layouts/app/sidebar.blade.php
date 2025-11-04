@@ -12,10 +12,48 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Tổng quan')" class="grid">
-                    <flux:navlist.item icon="home" class="mb-2" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Trang chủ') }}</flux:navlist.item>
-                    <flux:navlist.item icon="folder-open" class="mb-2" :href="route('page')" :current="request()->routeIs('page')" wire:navigate>{{ __('Trang') }}</flux:navlist.item>
-                    <flux:navlist.item icon:trailing="cog" class="mb-2" :href="route('project')" :current="request()->routeIs('project')" wire:navigate>{{ __('Dự án') }}</flux:navlist.item>
+                <flux:navlist.group :heading="__('Điều hướng')" class="grid">
+                    <flux:navlist.item icon="layout-grid" class="mb-2"
+                        :href="route('dashboard')"
+                        :current="request()->routeIs('dashboard')"
+                        wire:navigate>
+                        {{ __('Bảng điều khiển') }}
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="newspaper" class="mb-2"
+                        :href="route('facebook-pages.index')"
+                        :current="request()->routeIs('facebook-pages.*')"
+                        wire:navigate>
+                        {{ __('Trang') }}
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="folder" class="mb-2"
+                        :href="route('projects.index')"
+                        :current="request()->routeIs('projects.*')"
+                        wire:navigate>
+                        {{ __('Dự án') }}
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="user-group" class="mb-2"
+                        :href="route('facebook-accounts.index')"
+                        :current="request()->routeIs('facebook-accounts.*')"
+                        wire:navigate>
+                        {{ __('Tài khoản Facebook') }}
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="megaphone" class="mb-2"
+                        :href="route('ads.index')"
+                        :current="request()->routeIs('ads.*')"
+                        wire:navigate>
+                        {{ __('Quảng cáo') }}
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="chart-bar" class="mb-2"
+                        :href="route('reports.index')"
+                        :current="request()->routeIs('reports.*')"
+                        wire:navigate>
+                        {{ __('Báo cáo') }}
+                    </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
@@ -23,11 +61,11 @@
 
             <flux:navlist variant="outline">
                 <flux:navlist.item icon="folder-git-2" href="https://github.com/Minhtuan622/dti_fb_ads_system" target="_blank">
-                {{ __('Repository') }}
+                    {{ __('Repository') }}
                 </flux:navlist.item>
 
                 <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                {{ __('Documentation') }}
+                    {{ __('Documentation') }}
                 </flux:navlist.item>
             </flux:navlist>
 
