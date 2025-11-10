@@ -54,6 +54,13 @@
                         wire:navigate>
                         {{ __('Báo cáo') }}
                     </flux:navlist.item>
+
+                    <flux:navlist.item icon="cog-6-tooth" class="mb-2"
+                        :href="route('lark-settings.index')"
+                        :current="request()->routeIs('lark-settings.*')"
+                        wire:navigate>
+                        {{ __('Cấu hình Lark') }}
+                    </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
@@ -169,5 +176,6 @@
         {{ $slot }}
 
         @fluxScripts
+        @stack('scripts')
     </body>
 </html>

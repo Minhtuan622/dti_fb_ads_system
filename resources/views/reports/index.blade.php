@@ -63,6 +63,12 @@
                                     <flux:button size="sm" variant="filled" :href="route('reports.edit', $report)" wire:navigate>
                                         Sửa
                                     </flux:button>
+                                    <form action="{{ route('reports.send-to-lark', $report) }}" method="POST" class="inline">
+                                        @csrf
+                                        <flux:button size="sm" variant="primary" type="submit">
+                                            Gửi Lark
+                                        </flux:button>
+                                    </form>
                                     <flux:button size="sm" variant="danger" onclick="confirmDeleteReport({{ $report->id }})">
                                         Xóa
                                     </flux:button>

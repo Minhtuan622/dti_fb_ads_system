@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Report;
+use App\Services\LarkNotificationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -129,5 +130,25 @@ class ReportController extends Controller
         
         return redirect()->route('reports.index')
             ->with('success', 'Báo cáo đã được xóa thành công.');
+    }
+
+    /**
+     * Gửi báo cáo lên Lark
+     */
+    public function sendToLark(Report $report)
+    {
+        // Authorize that user owns the project of this report
+        $this->authorize('update', $report);
+        
+        $larkService = new LarkNotificationService();
+        $success = $larkService->sendReportFromModel($report);
+        
+        if ($success) {
+            return redirect()->route('reports.index')
+                ->with('success', 'Báo cáo đã được gửi lên Lark thành công!');
+        } else {
+            return redirect()->route('reports.index')
+                ->with('error', 'Không thể gửi báo cáo lên Lark. Vui lòng kiểm tra cấu hình webhook.');
+        }
     }
 }

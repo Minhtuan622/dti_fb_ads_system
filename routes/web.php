@@ -49,14 +49,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('reports/{report}/edit', 'App\\Http\\Controllers\\ReportController@edit')->name('reports.edit');
     Route::put('reports/{report}', 'App\\Http\\Controllers\\ReportController@update')->name('reports.update');
     Route::delete('reports/{report}', 'App\\Http\\Controllers\\ReportController@destroy')->name('reports.destroy');
+    Route::post('reports/{report}/send-to-lark', 'App\\Http\\Controllers\\ReportController@sendToLark')->name('reports.send-to-lark');
 
     // Facebook Pages routes
     Route::get('facebook-pages', 'App\Http\Controllers\FacebookPageController@index')->name('facebook-pages.index');
     Route::get('facebook-pages/create', 'App\Http\Controllers\FacebookPageController@create')->name('facebook-pages.create');
     Route::post('facebook-pages', 'App\Http\Controllers\FacebookPageController@store')->name('facebook-pages.store');
-    Route::get('facebook-pages/{facebookPage}/edit', 'App\Http\Controllers\FacebookPageController@edit')->name('facebook-pages.edit');
-    Route::put('facebook-pages/{facebookPage}', 'App\Http\Controllers\FacebookPageController@update')->name('facebook-pages.update');
-    Route::delete('facebook-pages/{facebookPage}', 'App\Http\Controllers\FacebookPageController@destroy')->name('facebook-pages.destroy');
+    Route::get('facebook-pages/{facebook_page}/edit', 'App\Http\Controllers\FacebookPageController@edit')->name('facebook-pages.edit');
+    Route::put('facebook-pages/{facebook_page}', 'App\Http\Controllers\FacebookPageController@update')->name('facebook-pages.update');
+    Route::delete('facebook-pages/{facebook_page}', 'App\Http\Controllers\FacebookPageController@destroy')->name('facebook-pages.destroy');
+
+    // Lark Settings routes
+    Route::get('lark-settings', 'App\Http\Controllers\LarkSettingController@index')->name('lark-settings.index');
+    Route::post('lark-settings', 'App\Http\Controllers\LarkSettingController@update')->name('lark-settings.update');
+    Route::post('lark-settings/test', 'App\Http\Controllers\LarkSettingController@testWebhook')->name('lark-settings.test');
 });
 
 Route::middleware(['auth'])->group(function () {
