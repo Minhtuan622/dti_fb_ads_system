@@ -63,6 +63,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('lark-settings', 'App\Http\Controllers\LarkSettingController@index')->name('lark-settings.index');
     Route::post('lark-settings', 'App\Http\Controllers\LarkSettingController@update')->name('lark-settings.update');
     Route::post('lark-settings/test', 'App\Http\Controllers\LarkSettingController@testWebhook')->name('lark-settings.test');
+
+    // Lark Message Template routes
+    Route::get('lark-settings/template', 'App\\Http\\Controllers\\LarkSettingController@template')->name('lark-settings.template');
+    Route::post('lark-settings/template', 'App\\Http\\Controllers\\LarkSettingController@updateTemplate')->name('lark-settings.template.update');
+    Route::post('lark-settings/template/test', 'App\\Http\\Controllers\\LarkSettingController@testTemplate')->name('lark-settings.template.test');
 });
 
 Route::middleware(['auth'])->group(function () {

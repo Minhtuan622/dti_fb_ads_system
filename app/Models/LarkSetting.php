@@ -10,6 +10,7 @@ class LarkSetting extends Model
         'webhook_url',
         'webhook_secret',
         'enabled',
+        'message_template',
     ];
 
     protected $casts = [

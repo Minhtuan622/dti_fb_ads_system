@@ -25,6 +25,34 @@ class LarkNotificationService
     }
 
     /**
+     * Render nội dung theo template đơn giản với placeholder {{key}}
+     */
+    public function renderMessageTemplate(string $template, array $data): string
+    {
+        // Bổ sung các giá trị đã format nếu có
+        $profit = ($data['revenue'] ?? 0) - ($data['spend'] ?? 0) - ($data['catse_cost'] ?? 0);
+
+        $formatted = [
+            'title' => $data['title'] ?? '',
+            'project_name' => $data['project_name'] ?? '',
+            'period' => $data['period'] ?? '',
+            'revenue' => number_format($data['revenue'] ?? 0, 2),
+            'spend' => number_format($data['spend'] ?? 0, 2),
+            'catse_cost' => number_format($data['catse_cost'] ?? 0, 2),
+            'expected_profit' => number_format($data['expected_profit'] ?? 0, 2),
+            'profit' => number_format($profit, 2),
+        ];
+
+        // Thay thế các placeholder {{ key }}
+        $rendered = preg_replace_callback('/\{\{\s*(.*?)\s*\}\}/', function ($matches) use ($formatted) {
+            $key = $matches[1];
+            return $formatted[$key] ?? '';
+        }, $template);
+
+        return $rendered;
+    }
+
+    /**
      * Gửi báo cáo dạng text đơn giản
      */
     public function sendTextMessage(string $message): bool
@@ -187,6 +215,14 @@ class LarkNotificationService
             'expected_profit' => $report->expected_profit
         ];
 
+        // Nếu có template cấu hình, ưu tiên gửi dạng text theo template
+        $settings = LarkSetting::getActiveSettings();
+        if ($settings && !empty($settings->message_template)) {
+            $text = $this->renderMessageTemplate($settings->message_template, $reportData);
+            return $this->sendTextMessage($text);
+        }
+
+        // Mặc định gửi rich text tài chính
         return $this->sendFinancialReport($reportData);
     }
 }

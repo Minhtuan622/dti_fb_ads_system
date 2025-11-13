@@ -57,9 +57,16 @@
 
                     <flux:navlist.item icon="cog-6-tooth" class="mb-2"
                         :href="route('lark-settings.index')"
-                        :current="request()->routeIs('lark-settings.*')"
+                        :current="request()->routeIs('lark-settings.index')"
                         wire:navigate>
                         {{ __('Cấu hình Lark') }}
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="pencil-square" class="mb-2"
+                        :href="route('lark-settings.template')"
+                        :current="request()->routeIs('lark-settings.template')"
+                        wire:navigate>
+                        {{ __('Mẫu tin nhắn Lark') }}
                     </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
